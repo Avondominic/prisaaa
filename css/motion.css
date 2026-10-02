@@ -1,0 +1,27 @@
+/* ================================================================
+   MOTION — ambient keyframes + reduced-motion overrides.
+   Scene transitions and reactions are driven from JS (Web
+   Animations API) and already respect reduced motion there.
+================================================================= */
+@keyframes dot-rise{
+  0%, 60%, 100% { transform: translateY(0);    opacity: .35; }
+  30%           { transform: translateY(-6px); opacity: 1; }
+}
+
+/* very slow drift so doodles feel alive without demanding attention */
+@keyframes doodle-drift{
+  0%, 100% { translate: 0 0;    rotate: 0deg; }
+  50%      { translate: 0 -4px; rotate: 6deg; }
+}
+.doodle--drift{ animation: doodle-drift 6s var(--ease-in-out) infinite; }
+.doodle--drift-slow{ animation: doodle-drift 9s var(--ease-in-out) infinite reverse; }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .opening__dots span{ opacity: 1; }
+}

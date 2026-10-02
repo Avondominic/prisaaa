@@ -1,0 +1,25 @@
+/* ================================================================
+   FONTS — self-hosted (SIL Open Font License), latin subset.
+   Works offline and when opened by double-clicking index.html.
+================================================================= */
+@font-face{
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 600 800;
+  font-display: swap;
+  src: url("../assets/fonts/bricolage-grotesque.woff2") format("woff2");
+}
+@font-face{
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url("../assets/fonts/caveat.woff2") format("woff2");
+}
+@font-face{
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/figtree.woff2") format("woff2");
+}

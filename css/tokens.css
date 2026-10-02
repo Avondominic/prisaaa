@@ -1,0 +1,54 @@
+/* ================================================================
+   DESIGN TOKENS — colour, type, space, motion.
+   Change the look of the whole site from here.
+================================================================= */
+:root{
+  /* colour — strawberry milk base, plum ink, one cherry accent */
+  --bg:            #ffeef3;
+  --bg-dot:        #f6cdd9;
+  --surface:       #ffffff;
+  --ink:           #2b1838;
+  --ink-soft:      #6e5a78;
+  --accent:        #ff3d68;
+  --accent-press:  #e02752;
+  --butter:        #ffd45e;
+  --sky:           #9ad8ff;
+  --lilac:         #cdb8ff;
+
+  /* washi tape (semi-transparent so it reads as tape over things) */
+  --tape-a: color-mix(in srgb, var(--butter) 78%, transparent);
+  --tape-b: color-mix(in srgb, var(--sky) 72%, transparent);
+
+  /* type */
+  --font-display: "Bricolage Grotesque", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-body:    "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-hand:    "Caveat", "Segoe Print", "Bradley Hand", cursive;
+
+  /* space */
+  --gutter: 20px;
+  --radius-sm: 12px;
+  --radius:    18px;
+  --radius-lg: 28px;
+
+  /* depth — hard offset "sticker" shadows rather than glow */
+  --shadow-chunky: 0 4px 0 var(--ink);
+  --shadow-chunky-press: 0 1px 0 var(--ink);
+  --shadow-soft: 0 10px 24px -10px rgba(43, 24, 56, .28);
+
+  /* motion — weighted, never bouncy-cartoon */
+  --ease-out:    cubic-bezier(.2, .8, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.34, 1.36, .64, 1);   /* mild overshoot, used sparingly */
+  --dur-fast: 160ms;
+  --dur:      320ms;
+  --dur-slow: 640ms;
+
+  /* layout */
+  --vh: 100vh;
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@supports (height: 100svh){
+  :root{ --vh: 100svh; }
+}

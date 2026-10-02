@@ -1,54 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Girlfriend 💖</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffeef3">
+  <meta name="description" content="a little something for you">
+  <title>a little something for you</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 28C5 20 2 14 5 9c3-5 9-4 11 1 2-5 8-6 11-1 3 5 0 11-11 19z' fill='%23ff3d68' stroke='%232b1838' stroke-width='2.5'/%3E%3C/svg%3E">
 
-<link rel="stylesheet" href="css/style.css">
+  <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/caveat.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/scenes.css">
+  <link rel="stylesheet" href="css/motion.css">
+
+  <!-- content first, then the engine -->
+  <script src="js/config.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/reactions.js" defer></script>
+  <script src="js/scenes.js" defer></script>
+  <script src="js/intro.js" defer></script>
+  <script src="js/opening.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
-<body class="blur-in-start">
+<body>
 
-  <div id="floating-bg"></div>
+  <noscript>
+    <p class="noscript">this surprise needs JavaScript turned on ♡</p>
+  </noscript>
 
-  <!-- titik navigasi kecil di atas: halaman 1 dari 4 -->
-  <nav class="page-nav">
-    <a href="index.html" class="active"></a>
-    <a href="gallery.html"></a>
-    <a href="reasons.html"></a>
-    <a href="letter.html"></a>
-  </nav>
+  <!-- screen-reader announcements (cat reactions, status) -->
+  <p id="live" class="sr-only" aria-live="polite"></p>
 
-  <!-- ================================================================
-       HALAMAN 1 — HERO / INTRO
+  <main id="experience">
 
-       Catatan: tombol musik & catatan TIDAK ditaruh manual di sini —
-       keduanya dibuat otomatis lewat js/script.js supaya muncul &
-       nyambung statusnya di semua halaman.
-  ================================================================= -->
-  <section id="hero" class="page">
-    <div class="hero-content">
+    <!-- ============================================================
+         1 · INTRO
+    ============================================================= -->
+    <section class="scene" data-scene="intro" aria-labelledby="intro-title" hidden>
+      <div class="scene__inner intro__inner">
 
-      <!-- ⬇⬇⬇ GANTI GIF DI SINI (Hero / Welcome GIF) ⬇⬇⬇
-           Sekarang masih pakai DUMMY: assets/hero.gif
-           Nanti tinggal timpa file assets/hero.gif dengan GIF
-           kamu sendiri (nama file HARUS SAMA: hero.gif). -->
-      <div class="gif-frame">
-        <img src="assets/hero.gif" alt="cute welcome gif">
+        <div class="intro__cat" data-stagger>
+          <span class="tag intro__tag" data-text="intro.tag">psst</span>
+          <span class="tape"></span>
+          <div class="sticker">
+            <img id="intro-cat" class="sticker__media" src="" alt="" width="230" height="230">
+          </div>
+          <svg class="doodle doodle--accent doodle--filled doodle--drift intro__sparkle" viewBox="0 0 34 34" aria-hidden="true">
+            <path d="M17 1c1 10 6 15 16 16-10 1-15 6-16 16-1-10-6-15-16-16 10-1 15-6 16-16z"/>
+          </svg>
+          <svg class="doodle doodle--drift-slow intro__heart" viewBox="0 0 26 24" aria-hidden="true">
+            <path d="M13 22C4 15 1 10 4 6c3-4 8-2 9 2 1-4 6-6 9-2 3 4 0 9-9 16z"/>
+          </svg>
+          <svg class="doodle intro__swirl" viewBox="0 0 54 34" aria-hidden="true">
+            <path d="M3 30c6-18 19-20 18-9-1 10-13 6-6-4 7-9 22-11 36-14"/>
+          </svg>
+        </div>
+
+        <h1 id="intro-title" class="intro__title" data-stagger>HEY!!</h1>
+        <p class="intro__line" data-stagger data-text="intro.line">I made something for you...</p>
+
+        <div class="intro__choices" data-stagger>
+          <p class="intro__hint hand" aria-hidden="true">
+            <span data-text="intro.hint">(choose wisely)</span>
+            <svg class="doodle intro__hint-arrow" viewBox="0 0 32 30">
+              <path d="M2 3c12 1 22 7 24 21"/><path d="M19 19l7 6 3-9"/>
+            </svg>
+          </p>
+          <button class="btn btn--primary intro__yes" type="button" data-text="intro.yes">YES</button>
+          <button class="btn intro__no" type="button" data-text="intro.no">no</button>
+        </div>
+
+        <p class="intro__reply hand" aria-live="polite" data-stagger></p>
       </div>
-      <!-- ⬆⬆⬆ AKHIR HERO GIF ⬆⬆⬆ -->
+    </section>
 
-      <h1 class="hero-title">happy birthday my <span>girlfriend!!</span> 💖</h1>
-      <p class="hero-subtitle">yess, this is your special day &lt;3</p>
-      
-      <div class="scroll-hint">↓</div>
-      <a href="gallery.html" class="nav-btn">open it &lt;3</a>
-    </div>
-  </section>
+    <!-- ============================================================
+         2 · OPENING
+    ============================================================= -->
+    <section class="scene" data-scene="opening" aria-label="opening your surprise" hidden>
+      <div class="scene__inner opening__inner">
+        <div class="opening__cat" data-stagger>
+          <div class="sticker">
+            <img id="opening-cat" class="sticker__media" src="" alt="" width="132" height="132">
+          </div>
+        </div>
+        <p class="opening__text hand" data-stagger data-focus>
+          <span data-text="opening.text">opening</span><span class="opening__dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+        </p>
+        <div class="opening__bar" data-stagger aria-hidden="true"><div class="opening__fill"></div></div>
+      </div>
+    </section>
 
-  <script src="js/script.js"></script>
+    <!-- ============================================================
+         3 · REVEAL  (stub — built at the next checkpoint)
+    ============================================================= -->
+    <section class="scene" data-scene="reveal" aria-labelledby="reveal-title" hidden>
+      <div class="scene__inner">
+        <h2 id="reveal-title" class="reveal__title" data-stagger>
+          <span data-text="reveal.title">Happy Birthday</span>
+          <span class="reveal__name" data-text="name">[NAME]</span>
+        </h2>
+        <p class="reveal__todo hand" data-stagger>(reveal scene — next checkpoint)</p>
+      </div>
+    </section>
+
+  </main>
 </body>
 </html>

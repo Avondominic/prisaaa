@@ -1,0 +1,151 @@
+/* ================================================================
+   COMPONENTS — reusable pieces shared by every scene
+================================================================= */
+
+/* ---------- chunky button ----------
+   Offset ink shadow; pressing pushes the button down into it. */
+.btn{
+  --btn-bg: var(--surface);
+  --btn-fg: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  min-width: 120px;
+  padding: 0 28px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  box-shadow: var(--shadow-chunky);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+  user-select: none;
+}
+
+.btn:active{
+  transform: translateY(3px);
+  box-shadow: var(--shadow-chunky-press);
+}
+
+@media (hover: hover){
+  .btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+  .btn:active{ transform: translateY(3px); box-shadow: var(--shadow-chunky-press); }
+}
+
+.btn--primary{
+  --btn-bg: var(--accent);
+  --btn-fg: #fff;
+}
+.btn--primary:active{ --btn-bg: var(--accent-press); }
+
+/* ---------- sticker frame ----------
+   White die-cut border around a cat / photo. */
+.sticker{
+  position: relative;
+  display: inline-block;
+  padding: 8px;
+  background: var(--surface);
+  border-radius: 26px;
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(43, 24, 56, .06);
+  transform: rotate(var(--tilt, -3deg));
+}
+
+.sticker__media{
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 19px;
+  background: #fff6f9;
+}
+
+/* ---------- washi tape ---------- */
+.tape{
+  position: absolute;
+  width: 86px;
+  height: 26px;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(255, 255, 255, .35) 0 6px,
+      transparent 6px 12px),
+    var(--tape-a);
+  /* torn ends */
+  clip-path: polygon(
+    0 8%, 4% 0, 8% 10%, 12% 0, 88% 0, 92% 12%, 96% 0, 100% 10%,
+    100% 90%, 96% 100%, 92% 88%, 88% 100%, 12% 100%, 8% 90%, 4% 100%, 0 92%);
+  transform: rotate(var(--tape-tilt, -6deg));
+  pointer-events: none;
+}
+.tape--b{ background-color: transparent; background-image:
+  repeating-linear-gradient(90deg, rgba(255,255,255,.4) 0 3px, transparent 3px 10px),
+  linear-gradient(var(--tape-b), var(--tape-b)); }
+
+/* ---------- handwritten tag ---------- */
+.tag{
+  display: inline-block;
+  padding: 2px 12px 4px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--butter);
+  font-family: var(--font-hand);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+  transform: rotate(-4deg);
+}
+
+/* ---------- doodles (inline SVG, drawn in ink/accent) ---------- */
+.doodle{
+  position: absolute;
+  pointer-events: none;
+  color: var(--ink);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.doodle--accent{ color: var(--accent); }
+.doodle--filled{ fill: currentColor; stroke: none; }
+
+/* ---------- cat reaction toast ----------
+   A cat sticker that pops in from the screen edge with a line of text. */
+.reaction{
+  position: fixed;
+  left: 50%;
+  bottom: calc(18px + var(--safe-bottom));
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  max-width: calc(100vw - 2 * var(--gutter));
+  padding: 8px 18px 8px 8px;
+  background: var(--surface);
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: var(--shadow-chunky);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.reaction__cat{
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff6f9;
+}
+.reaction__text{
+  font-family: var(--font-hand);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}

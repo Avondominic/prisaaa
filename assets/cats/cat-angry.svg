@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- PLACEHOLDER — replace with your own cat (angry). Any .gif/.webp/.png/.mp4 works; update js/config.js. -->
+  <rect width="400" height="400" fill="#fff6f9"/>
+  <rect x="14" y="14" width="372" height="372" rx="28" fill="none" stroke="#f3b6c8" stroke-width="4" stroke-dasharray="14 10"/>
+  <path d="M60 200l60 6M64 230l58-8M340 200l-60 6M336 230l-58-8" stroke="#2b1838" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M95 175C95 120 110 95 118 58L170 100C188 96 212 96 230 100L282 58C290 95 305 120 305 175C305 240 260 280 200 280C140 280 95 240 95 175Z" fill="#fff" stroke="#2b1838" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M138 158l40 16M262 158l-40 16" stroke="#2b1838" stroke-width="8" stroke-linecap="round"/><circle cx="162" cy="188" r="9" fill="#2b1838"/><circle cx="238" cy="188" r="9" fill="#2b1838"/><path d="M180 232q20-16 40 0" stroke="#2b1838" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M330 70l10 18M352 64l-6 20M334 96l20-6M324 82l22-2" stroke="#ff3d68" stroke-width="6" stroke-linecap="round"/>
+  <text x="200" y="334" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="24" letter-spacing="4" fill="#ff3d68">PLACEHOLDER</text>
+  <text x="200" y="364" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#6e5a78">cat · angry</text>
+</svg>
