@@ -43,12 +43,21 @@ window.BIRTHDAY = {
 
   /* ---------- 3. reveal ---------- */
   reveal: {
-    title: "Happy Birthday",
+    kicker: "surprise!!",             // little tag above the title
+    title: "HAPPY BIRTHDAYYY!!",      // trailing !!/?? are coloured automatically
+    catMood: "love",                  // which cat from `cats` sits on the reveal
+
     // The three goofy images. Leave src empty ("") to keep the placeholder.
     goofy: [
-      { src: "", alt: "[GOOFY IMAGE 1 DESCRIPTION]" },
-      { src: "", alt: "[GOOFY IMAGE 2 DESCRIPTION]" },
-      { src: "", alt: "[GOOFY IMAGE 3 DESCRIPTION]" }
+      { src: "", alt: "[GOOFY IMAGE 1 DESCRIPTION]", caption: "[CAPTION 1]" },
+      { src: "", alt: "[GOOFY IMAGE 2 DESCRIPTION]", caption: "[CAPTION 2]" },
+      { src: "", alt: "[GOOFY IMAGE 3 DESCRIPTION]", caption: "[CAPTION 3]" }
+    ],
+    // What the cat says when a goofy image is clicked (one per image, in order).
+    goofyReactions: [
+      { mood: "shock", text: "LMAOOO" },
+      { mood: "happy", text: "iconic. truly." },
+      { mood: "love",  text: "never forget this one" }
     ]
   },
 
@@ -71,13 +80,16 @@ window.BIRTHDAY = {
     signature: "[YOUR NAME]"
   },
 
-  /* ---------- hidden easter egg ---------- */
+  /* ---------- hidden easter egg ----------
+     Tap the target element `taps` times in a row (each tap within
+     `withinMs` of the last) to open a little secret note.
+     target: any element id — "reveal-cat" is the big cat on the reveal. */
   easterEgg: {
     enabled: true,
-    // Which cat to tap, and how many times in a row.
-    // target: any element id; "reveal-cat" is the cat on the birthday reveal.
-    trigger: { target: "reveal-cat", taps: 5 },
-    message: "[EASTER EGG MESSAGE]"
+    trigger: { target: "reveal-cat", taps: 5, withinMs: 1500 },
+    title: "you found the secret!!",
+    message: "[EASTER EGG MESSAGE]",
+    close: "close"
   },
 
   /* ---------- cat reactions ----------

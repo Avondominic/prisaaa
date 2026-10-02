@@ -25,6 +25,8 @@
   <script src="js/scenes.js" defer></script>
   <script src="js/intro.js" defer></script>
   <script src="js/opening.js" defer></script>
+  <script src="js/reveal.js" defer></script>
+  <script src="js/easter-egg.js" defer></script>
   <script src="js/parallax.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
@@ -115,15 +117,44 @@
     </section>
 
     <!-- ============================================================
-         3 · REVEAL  (stub — built at the next checkpoint)
+         3 · REVEAL — the payoff
     ============================================================= -->
-    <section class="scene" data-scene="reveal" aria-labelledby="reveal-title" hidden>
-      <div class="scene__inner">
-        <h2 id="reveal-title" class="reveal__title" data-stagger>
-          <span data-text="reveal.title">Happy Birthday</span>
-          <span class="reveal__name" data-text="name">[NAME]</span>
-        </h2>
-        <p class="reveal__todo hand" data-stagger>(reveal scene — next checkpoint)</p>
+    <section class="scene scene--reveal" data-scene="reveal" aria-labelledby="reveal-title" hidden>
+
+      <!-- slow floating hearts & stars behind everything -->
+      <div class="reveal__ambient" aria-hidden="true">
+        <svg class="floaty floaty--1 doodle doodle--accent doodle--filled" viewBox="0 0 26 24"><use href="#d-heart"/></svg>
+        <svg class="floaty floaty--2 doodle" viewBox="0 0 34 34"><use href="#d-star"/></svg>
+        <svg class="floaty floaty--3 doodle doodle--filled" viewBox="0 0 34 34"><use href="#d-sparkle"/></svg>
+        <svg class="floaty floaty--4 doodle" viewBox="0 0 26 24"><use href="#d-heart"/></svg>
+        <svg class="floaty floaty--5 doodle doodle--accent doodle--filled" viewBox="0 0 34 34"><use href="#d-sparkle"/></svg>
+        <svg class="floaty floaty--6 doodle doodle--accent doodle--filled" viewBox="0 0 26 24"><use href="#d-heart"/></svg>
+        <svg class="floaty floaty--7 doodle" viewBox="0 0 34 34"><use href="#d-star"/></svg>
+        <svg class="floaty floaty--8 doodle doodle--filled" viewBox="0 0 34 34"><use href="#d-sparkle"/></svg>
+      </div>
+
+      <div class="scene__inner reveal__inner">
+
+        <div class="reveal__copy">
+          <span class="tag reveal__kicker" data-text="reveal.kicker">surprise!!</span>
+          <!-- visual title is split into letters by js/reveal.js; screen readers get the plain text -->
+          <h2 id="reveal-title" class="reveal__title" data-focus>
+            <span class="sr-only reveal__title-text"></span>
+            <span class="reveal__title-visual" aria-hidden="true"></span>
+          </h2>
+          <p class="reveal__name"><span class="reveal__name-text" data-text="name">[NAME]</span></p>
+        </div>
+
+        <div class="reveal__cat" data-depth="4">
+          <span class="tape tape--b"></span>
+          <button id="reveal-cat" class="sticker reveal__sticker" type="button" aria-label="the birthday cat">
+            <img class="sticker__media" src="" alt="" width="380" height="380">
+          </button>
+          <svg class="doodle doodle--accent doodle--filled reveal__spark reveal__spark--a" viewBox="0 0 34 34" aria-hidden="true"><use href="#d-sparkle"/></svg>
+          <svg class="doodle reveal__spark reveal__spark--b" viewBox="0 0 34 34" aria-hidden="true"><use href="#d-sparkle"/></svg>
+        </div>
+
+        <ul class="reveal__goofy" aria-label="goofy pictures"></ul>
       </div>
     </section>
 

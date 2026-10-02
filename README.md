@@ -8,8 +8,8 @@ intro → opening → reveal → song → memories → letter → gift → final
 ```
 
 > **Work in progress.** Built so far: project skeleton, styling system,
-> scene controller, cat reactions, **intro** and **opening**. The reveal is a
-> stub; the remaining scenes come next.
+> scene controller, cat reactions, **intro**, **opening** and the **birthday
+> reveal** (with the easter egg). Song, memories, letter, gift and finale come next.
 
 ## Make it yours
 
@@ -19,7 +19,12 @@ intro → opening → reveal → song → memories → letter → gift → final
    and update the matching paths in `config.js`.
 3. Colours, fonts and motion timing live in [`css/tokens.css`](css/tokens.css).
 
-The easter egg (trigger + message) is under `easterEgg` in `config.js`.
+The easter egg is under `easterEgg` in `config.js`: pick which element to tap
+(`trigger.target`, default the big cat on the reveal), how many taps
+(`trigger.taps`) and the secret `message`.
+
+The three goofy images on the reveal are `reveal.goofy` — set each `src`
+(e.g. `assets/goofy/1.jpg`) and `caption`; empty `src` shows a placeholder.
 Music never autoplays — it only starts from the song section's player.
 
 ## Preview
@@ -50,6 +55,8 @@ js/
   scenes.js           scene controller
   intro.js            scene 1
   opening.js          scene 2
+  reveal.js           scene 3 — birthday reveal
+  easter-egg.js       hidden tap-to-unlock note
   parallax.js         subtle mouse parallax on desktop (off for touch / reduced motion)
   main.js             boot
 assets/               cats, goofy images, memories, music, fonts

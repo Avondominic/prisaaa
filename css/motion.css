@@ -16,7 +16,16 @@
 .doodle--drift{ animation: doodle-drift 6s var(--ease-in-out) infinite; }
 .doodle--drift-slow{ animation: doodle-drift 9s var(--ease-in-out) infinite reverse; }
 
+/* ambient hearts & stars drifting up behind the reveal */
+@keyframes float-up{
+  0%   { transform: translateY(0) rotate(0deg);        opacity: 0; }
+  12%  { opacity: .55; }
+  85%  { opacity: .4; }
+  100% { transform: translateY(calc(-1 * var(--vh) - 80px)) rotate(40deg); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce){
+  .reveal__ambient{ display: none; }
   *, *::before, *::after{
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
