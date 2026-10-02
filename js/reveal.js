@@ -218,6 +218,27 @@ Scenes.register('reveal', (() => {
       // hover / interaction styles take over again
       [kicker, nameEl, sticker, ...letters, ...polaroids].forEach((el) =>
         el.getAnimations().forEach((a) => a.cancel()));
+
+      // the payoff has landed: put the song on the page below and
+      // offer a gentle cue — she scrolls when she's ready
+      Scenes.unlock('song');
+      showCue();
+    });
+  }
+
+  function showCue(){
+    const cue = U.$('.cue', scene);
+    if (!cue.hidden) return;
+    cue.hidden = false;
+    U.animate(cue, [
+      { opacity: 0, transform: 'translate(-50%, 10px)' },
+      { opacity: 1, transform: 'translate(-50%, 0)' }
+    ], { duration: 600, delay: 400, fill: 'backwards' });
+    cue.addEventListener('click', () => {
+      if (!Scenes.isEntered('song')) return Scenes.go('song');
+      const song = document.querySelector('section[data-scene="song"]');
+      song.scrollIntoView({ behavior: U.reduced() ? 'auto' : 'smooth', block: 'start' });
+      U.$('#song-heading').focus({ preventScroll: true });
     });
   }
 

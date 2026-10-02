@@ -26,6 +26,8 @@
   <script src="js/intro.js" defer></script>
   <script src="js/opening.js" defer></script>
   <script src="js/reveal.js" defer></script>
+  <script src="js/music.js" defer></script>
+  <script src="js/song.js" defer></script>
   <script src="js/easter-egg.js" defer></script>
   <script src="js/parallax.js" defer></script>
   <script src="js/main.js" defer></script>
@@ -44,6 +46,10 @@
     <symbol id="d-arrow" viewBox="0 0 32 30"><path d="M2 3c12 1 22 7 24 21"/><path d="M19 19l7 6 3-9"/></symbol>
     <symbol id="d-wave" viewBox="0 0 120 30"><path d="M3 15c9-12 18-12 27 0s18 12 27 0 18-12 27 0 18 12 27 0"/></symbol>
     <symbol id="d-star" viewBox="0 0 34 34"><path d="M17 3l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 4.8v14.4a1 1 0 0 0 1.5.86l11.2-7.2a1 1 0 0 0 0-1.72L9.5 3.94A1 1 0 0 0 8 4.8z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="5.5" y="4" width="4.6" height="16" rx="1.4" fill="currentColor"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-vol" viewBox="0 0 24 24"><path d="M3 9.5v5h4l5 4.5v-14l-5 4.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M3 9.5v5h4l5 4.5v-14l-5 4.5z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="d-loop" viewBox="0 0 150 60"><path d="M3 45c25 10 45 4 55-12 8-14-6-24-14-12-9 13 10 28 34 22 22-5 42-26 68-30" stroke-dasharray="2 9"/></symbol>
   </svg>
 
@@ -155,6 +161,81 @@
         </div>
 
         <ul class="reveal__goofy" aria-label="goofy pictures"></ul>
+      </div>
+
+      <!-- appears once the reveal has played; scrolling works just as well -->
+      <button class="cue hand" type="button" hidden>
+        <span data-text="reveal.more">there's more</span>
+        <svg class="doodle cue__arrow" viewBox="0 0 24 30" aria-hidden="true"><path d="M12 3v22M5 18l7 8 7-8"/></svg>
+      </button>
+    </section>
+
+    <!-- ============================================================
+         4 · SONG — "okay, now listen to this"
+         Never autoplays. The player only starts on a press.
+    ============================================================= -->
+    <section class="scene scene--song" data-scene="song" aria-labelledby="song-heading" hidden>
+      <div class="scene__inner song__inner">
+
+        <div class="song__copy">
+          <span class="tag song__kicker" data-stagger data-text="song.kicker">okay okay okay</span>
+          <h2 id="song-heading" class="song__heading" tabindex="-1" data-stagger data-text="song.heading">now listen to this</h2>
+        </div>
+
+        <!-- the cassette: reels turn while playing, tape winds with progress -->
+        <div class="song__deck" data-stagger>
+          <span class="tape song__deck-tape"></span>
+          <div class="cassette" aria-hidden="true">
+            <svg class="cassette__art" viewBox="0 0 400 254">
+              <rect x="3" y="3" width="394" height="248" rx="22" class="c-body"/>
+              <g class="c-screws"><circle cx="20" cy="20" r="6"/><circle cx="380" cy="20" r="6"/><circle cx="20" cy="234" r="6"/><circle cx="380" cy="234" r="6"/></g>
+              <rect x="34" y="24" width="332" height="152" rx="14" class="c-label"/>
+              <rect x="34" y="150" width="332" height="10" class="c-stripe-a"/>
+              <rect x="34" y="160" width="332" height="8" class="c-stripe-b"/>
+              <rect x="100" y="88" width="200" height="56" rx="28" class="c-window"/>
+              <circle cx="150" cy="116" r="24" class="c-spool c-spool--l"/>
+              <circle cx="250" cy="116" r="24" class="c-spool c-spool--r"/>
+              <g class="c-reel c-reel--l"><circle cx="150" cy="116" r="15" class="c-hub"/><path d="M150 103v6M161 122.5l-5-3M139 122.5l5-3" class="c-teeth"/></g>
+              <g class="c-reel c-reel--r"><circle cx="250" cy="116" r="15" class="c-hub"/><path d="M250 103v6M261 122.5l-5-3M239 122.5l5-3" class="c-teeth"/></g>
+              <path d="M92 251l18-46h180l18 46" class="c-foot"/>
+              <circle cx="146" cy="230" r="7" class="c-hole"/><circle cx="254" cy="230" r="7" class="c-hole"/>
+            </svg>
+            <div class="cassette__label">
+              <span class="cassette__side">A</span>
+              <span class="cassette__title hand" data-text="song.title">[SONG TITLE]</span>
+            </div>
+          </div>
+          <div class="song__cat">
+            <div class="sticker"><img id="song-cat" class="sticker__media" src="" alt="" width="140" height="140"></div>
+          </div>
+        </div>
+
+        <div class="player" data-stagger role="group" aria-labelledby="player-title">
+          <div class="player__meta">
+            <p id="player-title" class="player__title" data-text="song.title">[SONG TITLE]</p>
+            <p class="player__artist" data-text="song.artist">[SONG ARTIST]</p>
+          </div>
+
+          <div class="player__main">
+            <button class="player__play" type="button" aria-label="Play">
+              <svg class="player__icon" aria-hidden="true"><use href="#i-play"/></svg>
+            </button>
+            <div class="player__progress">
+              <input class="range player__seek" type="range" min="0" max="0" step="1" value="0" aria-label="Song position">
+              <div class="player__times" aria-hidden="true"><span class="player__now">0:00</span><span class="player__dur">--:--</span></div>
+            </div>
+          </div>
+
+          <div class="player__volume">
+            <button class="player__mute" type="button" aria-label="Mute" aria-pressed="false">
+              <svg aria-hidden="true"><use href="#i-vol"/></svg>
+            </button>
+            <input class="range player__vol" type="range" min="0" max="100" step="5" value="80" aria-label="Volume">
+            <p class="player__hint hand" data-text="song.hint">(press play whenever you're ready — volume up)</p>
+          </div>
+
+          <p class="player__missing" hidden></p>
+        </div>
       </div>
     </section>
 

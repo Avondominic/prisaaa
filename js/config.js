@@ -44,6 +44,7 @@ window.BIRTHDAY = {
   /* ---------- 3. reveal ---------- */
   reveal: {
     kicker: "surprise!!",             // little tag above the title
+    more: "there's more",             // the little "keep scrolling" cue
     title: "HAPPY BIRTHDAYYY!!",      // trailing !!/?? are coloured automatically
     catMood: "love",                  // which cat from `cats` sits on the reveal
 
@@ -61,11 +62,22 @@ window.BIRTHDAY = {
     ]
   },
 
-  /* ---------- 4. song (never autoplays) ---------- */
+  /* ---------- 4. song ----------
+     Music is optional and NEVER autoplays: it only starts when the
+     play button is pressed. If the file is missing, the player says so. */
   song: {
     title: "[SONG TITLE]",
     artist: "[SONG ARTIST]",
-    src: "assets/music/song.mp3"     // drop your .mp3 here with this exact name
+    // 1. put your .mp3 in assets/music/   2. set its path here, e.g. "assets/music/song.mp3"
+    //    (left empty, the player shows a friendly "no song yet" note instead of a broken file)
+    src: "",
+
+    kicker: "okay okay okay",
+    heading: "now listen to this",
+    hint: "(press play whenever you're ready — volume up)",
+    missing: "no song added yet — put the file in assets/music/ and set song.src in config.js",
+    firstPlay: { mood: "love", text: "ahh yes. this one." },   // cat reaction the first time it plays
+    volume: 0.8                      // starting volume, 0 – 1
   },
 
   /* ---------- 5. memories ---------- */

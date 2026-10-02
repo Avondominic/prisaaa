@@ -24,7 +24,23 @@
   100% { transform: translateY(calc(-1 * var(--vh) - 80px)) rotate(40deg); opacity: 0; }
 }
 
+/* "there's more" arrow */
+@keyframes cue-bob{
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(5px); }
+}
+
+/* cassette reels (paused unless the song is playing) */
+@keyframes reel-spin{
+  to { transform: rotate(-360deg); }
+}
+
+/* story scenes wait off-screen with their content hidden until
+   their entrance plays */
+.scene.is-waiting [data-stagger]{ opacity: 0; }
+
 @media (prefers-reduced-motion: reduce){
+  .c-reel{ animation: none; }
   .reveal__ambient{ display: none; }
   *, *::before, *::after{
     animation-duration: 1ms !important;

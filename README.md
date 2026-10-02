@@ -9,7 +9,8 @@ intro → opening → reveal → song → memories → letter → gift → final
 
 > **Work in progress.** Built so far: project skeleton, styling system,
 > scene controller, cat reactions, **intro**, **opening** and the **birthday
-> reveal** (with the easter egg). Song, memories, letter, gift and finale come next.
+> reveal** (with the easter egg) and the **song** section with its sticky
+> mini-player. Memories, letter, gift and finale come next.
 
 ## Make it yours
 
@@ -26,6 +27,12 @@ The easter egg is under `easterEgg` in `config.js`: pick which element to tap
 The three goofy images on the reveal are `reveal.goofy` — set each `src`
 (e.g. `assets/goofy/1.jpg`) and `caption`; empty `src` shows a placeholder.
 Music never autoplays — it only starts from the song section's player.
+To add the song: put the `.mp3` in `assets/music/` and set `song.src`
+(plus `song.title` / `song.artist`) in `config.js`.
+
+> Seeking within the song needs a server that supports range requests.
+> Netlify, GitHub Pages and opening `index.html` directly all do;
+> `python3 -m http.server` does not (play/pause still work there).
 
 ## Preview
 
@@ -57,6 +64,8 @@ js/
   opening.js          scene 2
   reveal.js           scene 3 — birthday reveal
   easter-egg.js       hidden tap-to-unlock note
+  music.js            audio engine + sticky mini-player (never autoplays)
+  song.js             scene 4 — cassette + player
   parallax.js         subtle mouse parallax on desktop (off for touch / reduced motion)
   main.js             boot
 assets/               cats, goofy images, memories, music, fonts

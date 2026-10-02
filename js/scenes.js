@@ -8,6 +8,11 @@
    • "Story" scenes (reveal onwards) stay on the page once unlocked,
      so she can scroll back through everything she's seen.
 
+   Story scenes are unlocked by the scene before them
+   (Scenes.unlock('song')): they appear on the page right away but
+   only play their entrance once scrolled into view, so nothing
+   ever drags her away from what she's looking at.
+
    Scene modules register themselves:
      Scenes.register('intro', { init(el){}, enter(el){} })
    and move the story forward with:
@@ -45,19 +50,20 @@ window.Scenes = (() => {
     scene.getAnimations?.().forEach((a) => a.cancel());
   }
 
-  async function enter(id){
+  async function enter(id, { scroll = true, focus = true } = {}){
     const scene = el(id);
     if (!scene) return;
     scene.hidden = false;
+    scene.classList.remove('is-waiting');
     current = id;
     document.documentElement.dataset.currentScene = id;
 
-    if (!STAGE.has(id)) scene.scrollIntoView({ behavior: U.reduced() ? 'auto' : 'smooth', block: 'start' });
-    else window.scrollTo(0, 0);
+    if (STAGE.has(id)) window.scrollTo(0, 0);
+    else if (scroll) scene.scrollIntoView({ behavior: U.reduced() ? 'auto' : 'smooth', block: 'start' });
 
     // move focus to the scene heading so keyboard/screen-reader users follow along
     const heading = U.$('[data-focus]', scene) || U.$('h1, h2', scene);
-    if (heading){
+    if (heading && focus){
       heading.setAttribute('tabindex', '-1');
       heading.focus({ preventScroll: true });
     }
@@ -70,15 +76,37 @@ window.Scenes = (() => {
   /* Transitions are queued, never dropped: a scene that finishes
      early (e.g. a short "opening") still advances cleanly. */
   let chain = Promise.resolve();
-  function go(id){
+  const entered = new Set();
+  function go(id, opts){
     chain = chain.then(async () => {
-      if (id === current) return;
+      if (entered.has(id)) return;
+      entered.add(id);
       const from = current && el(current);
       if (from && STAGE.has(current)) await leave(from);
-      await enter(id);
+      await enter(id, opts);
     });
     return chain;
   }
+
+  /* Put the next story scene on the page; its entrance plays when
+     it scrolls into view (or straight away via Scenes.go). */
+  function unlock(id){
+    const scene = el(id);
+    if (!scene || !scene.hidden) return;
+    scene.classList.add('is-waiting');
+    scene.hidden = false;
+    handlers[id]?.unlock?.(scene);
+
+    if (!('IntersectionObserver' in window)) return go(id, { scroll: false, focus: false });
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      go(id, { scroll: false, focus: false });
+    }, { rootMargin: '0px 0px -25% 0px' });
+    io.observe(scene);
+  }
+
+  const isEntered = (id) => entered.has(id);
 
   function next(){
     const i = ORDER.indexOf(current);
@@ -96,5 +124,5 @@ window.Scenes = (() => {
     return go(ORDER[0]);
   }
 
-  return { register, go, next, start, get current(){ return current; } };
+  return { register, go, next, unlock, start, isEntered, get current(){ return current; } };
 })();
