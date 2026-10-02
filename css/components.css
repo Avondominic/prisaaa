@@ -60,6 +60,7 @@
 
 .sticker__media{
   width: 100%;
+  height: auto;               /* let aspect-ratio win over the height attribute */
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 19px;

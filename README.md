@@ -50,6 +50,7 @@ js/
   scenes.js           scene controller
   intro.js            scene 1
   opening.js          scene 2
+  parallax.js         subtle mouse parallax on desktop (off for touch / reduced motion)
   main.js             boot
 assets/               cats, goofy images, memories, music, fonts
 ```
@@ -59,7 +60,8 @@ assets/               cats, goofy images, memories, music, fonts
 - Respects `prefers-reduced-motion` (motion becomes short fades).
 - Keyboard friendly; focus follows each scene; reactions are announced to
   screen readers.
-- Designed mobile-first for ~390px wide screens.
+- Designed for desktop first (1280×720 → 1920×1080), with tablet and phone
+  (down to ~390px wide) fully supported.
 
 ## License
 

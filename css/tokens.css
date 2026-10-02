@@ -25,7 +25,7 @@
   --font-hand:    "Caveat", "Segoe Print", "Bradley Hand", cursive;
 
   /* space */
-  --gutter: 20px;
+  --gutter: 20px;           /* 32px from tablet up — see bottom of file */
   --radius-sm: 12px;
   --radius:    18px;
   --radius-lg: 28px;
@@ -51,4 +51,8 @@
 
 @supports (height: 100svh){
   :root{ --vh: 100svh; }
+}
+
+@media (min-width: 768px){
+  :root{ --gutter: 32px; }
 }

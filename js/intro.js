@@ -10,6 +10,7 @@ Scenes.register('intro', (() => {
   let cat, yesBtn, noBtn, reply;
   let noCount = 0;
   let decided = false;
+  let mood = 'neutral';          // the cat's resting mood (angry after a NO)
 
   function init(scene){
     cat    = U.$('#intro-cat', scene);
@@ -31,6 +32,21 @@ Scenes.register('intro', (() => {
     cat = Cats.set(cat, 'neutral');
     yesBtn.addEventListener('click', onYes);
     noBtn.addEventListener('click', onNo);
+
+    // desktop: the cat reacts while the mouse hovers each button
+    peek(yesBtn, 'love');
+    peek(noBtn, 'shock');
+  }
+
+  function peek(btn, hoverMood){
+    btn.addEventListener('pointerenter', (e) => {
+      if (decided || e.pointerType !== 'mouse') return;
+      cat = Cats.set(cat, hoverMood);
+    });
+    btn.addEventListener('pointerleave', (e) => {
+      if (decided || e.pointerType !== 'mouse') return;
+      cat = Cats.set(cat, mood);
+    });
   }
 
   function shake(el){
@@ -74,7 +90,8 @@ Scenes.register('intro', (() => {
     yesBtn.style.setProperty('--size', Math.min(1 + noCount * 0.1, 1.5).toFixed(2));
     noBtn.style.setProperty('--size',  Math.max(1 - noCount * 0.04, 0.86).toFixed(2));
 
-    cat = Cats.set(cat, 'angry');
+    mood = 'angry';
+    cat = Cats.set(cat, mood);
     shake(cat.closest('.intro__cat'));
   }
 

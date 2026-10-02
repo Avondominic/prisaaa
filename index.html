@@ -25,6 +25,7 @@
   <script src="js/scenes.js" defer></script>
   <script src="js/intro.js" defer></script>
   <script src="js/opening.js" defer></script>
+  <script src="js/parallax.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -32,6 +33,17 @@
   <noscript>
     <p class="noscript">this surprise needs JavaScript turned on ♡</p>
   </noscript>
+
+  <!-- doodle sprite: draw once, <use> anywhere -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="d-sparkle" viewBox="0 0 34 34"><path d="M17 1c1 10 6 15 16 16-10 1-15 6-16 16-1-10-6-15-16-16 10-1 15-6 16-16z"/></symbol>
+    <symbol id="d-heart" viewBox="0 0 26 24"><path d="M13 22C4 15 1 10 4 6c3-4 8-2 9 2 1-4 6-6 9-2 3 4 0 9-9 16z"/></symbol>
+    <symbol id="d-swirl" viewBox="0 0 54 34"><path d="M3 30c6-18 19-20 18-9-1 10-13 6-6-4 7-9 22-11 36-14"/></symbol>
+    <symbol id="d-arrow" viewBox="0 0 32 30"><path d="M2 3c12 1 22 7 24 21"/><path d="M19 19l7 6 3-9"/></symbol>
+    <symbol id="d-wave" viewBox="0 0 120 30"><path d="M3 15c9-12 18-12 27 0s18 12 27 0 18-12 27 0 18 12 27 0"/></symbol>
+    <symbol id="d-star" viewBox="0 0 34 34"><path d="M17 3l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z"/></symbol>
+    <symbol id="d-loop" viewBox="0 0 150 60"><path d="M3 45c25 10 45 4 55-12 8-14-6-24-14-12-9 13 10 28 34 22 22-5 42-26 68-30" stroke-dasharray="2 9"/></symbol>
+  </svg>
 
   <!-- screen-reader announcements (cat reactions, status) -->
   <p id="live" class="sr-only" aria-live="polite"></p>
@@ -41,41 +53,47 @@
     <!-- ============================================================
          1 · INTRO
     ============================================================= -->
-    <section class="scene" data-scene="intro" aria-labelledby="intro-title" hidden>
+    <section class="scene scene--intro" data-scene="intro" aria-labelledby="intro-title" hidden>
+
+      <!-- desktop-only decoration scattered around the composition -->
+      <div class="intro__decor" aria-hidden="true">
+        <span class="decor decor--1" data-depth="-16"><svg class="doodle doodle--accent doodle--filled doodle--drift" viewBox="0 0 34 34"><use href="#d-sparkle"/></svg></span>
+        <span class="decor decor--2" data-depth="12"><svg class="doodle doodle--drift-slow" viewBox="0 0 26 24"><use href="#d-heart"/></svg></span>
+        <span class="decor decor--3" data-depth="10"><svg class="doodle" viewBox="0 0 120 30"><use href="#d-wave"/></svg></span>
+        <span class="decor decor--4" data-depth="-12"><svg class="doodle doodle--accent doodle--filled doodle--drift" viewBox="0 0 26 24"><use href="#d-heart"/></svg></span>
+        <span class="decor decor--5" data-depth="8"><svg class="doodle doodle--drift-slow" viewBox="0 0 34 34"><use href="#d-star"/></svg></span>
+        <span class="decor decor--6" data-depth="-8"><svg class="doodle doodle--filled doodle--drift" viewBox="0 0 34 34"><use href="#d-sparkle"/></svg></span>
+        <span class="decor decor--7" data-depth="6"><svg class="doodle" viewBox="0 0 150 60"><use href="#d-loop"/></svg></span>
+      </div>
+
       <div class="scene__inner intro__inner">
 
-        <div class="intro__cat" data-stagger>
+        <div class="intro__cat" data-stagger data-depth="5">
           <span class="tag intro__tag" data-text="intro.tag">psst</span>
           <span class="tape"></span>
           <div class="sticker">
-            <img id="intro-cat" class="sticker__media" src="" alt="" width="230" height="230">
+            <img id="intro-cat" class="sticker__media" src="" alt="" width="460" height="460">
           </div>
-          <svg class="doodle doodle--accent doodle--filled doodle--drift intro__sparkle" viewBox="0 0 34 34" aria-hidden="true">
-            <path d="M17 1c1 10 6 15 16 16-10 1-15 6-16 16-1-10-6-15-16-16 10-1 15-6 16-16z"/>
-          </svg>
-          <svg class="doodle doodle--drift-slow intro__heart" viewBox="0 0 26 24" aria-hidden="true">
-            <path d="M13 22C4 15 1 10 4 6c3-4 8-2 9 2 1-4 6-6 9-2 3 4 0 9-9 16z"/>
-          </svg>
-          <svg class="doodle intro__swirl" viewBox="0 0 54 34" aria-hidden="true">
-            <path d="M3 30c6-18 19-20 18-9-1 10-13 6-6-4 7-9 22-11 36-14"/>
-          </svg>
+          <svg class="doodle doodle--accent doodle--filled doodle--drift intro__sparkle" viewBox="0 0 34 34" aria-hidden="true"><use href="#d-sparkle"/></svg>
+          <svg class="doodle doodle--drift-slow intro__heart" viewBox="0 0 26 24" aria-hidden="true"><use href="#d-heart"/></svg>
+          <svg class="doodle intro__swirl" viewBox="0 0 54 34" aria-hidden="true"><use href="#d-swirl"/></svg>
         </div>
 
-        <h1 id="intro-title" class="intro__title" data-stagger>HEY!!</h1>
-        <p class="intro__line" data-stagger data-text="intro.line">I made something for you...</p>
+        <div class="intro__copy">
+          <h1 id="intro-title" class="intro__title" data-stagger>HEY!!</h1>
+          <p class="intro__line" data-stagger data-text="intro.line">I made something for you...</p>
 
-        <div class="intro__choices" data-stagger>
-          <p class="intro__hint hand" aria-hidden="true">
-            <span data-text="intro.hint">(choose wisely)</span>
-            <svg class="doodle intro__hint-arrow" viewBox="0 0 32 30">
-              <path d="M2 3c12 1 22 7 24 21"/><path d="M19 19l7 6 3-9"/>
-            </svg>
-          </p>
-          <button class="btn btn--primary intro__yes" type="button" data-text="intro.yes">YES</button>
-          <button class="btn intro__no" type="button" data-text="intro.no">no</button>
+          <div class="intro__choices" data-stagger>
+            <p class="intro__hint hand" aria-hidden="true">
+              <span data-text="intro.hint">(choose wisely)</span>
+              <svg class="doodle intro__hint-arrow" viewBox="0 0 32 30"><use href="#d-arrow"/></svg>
+            </p>
+            <button class="btn btn--primary intro__yes" type="button" data-text="intro.yes">YES</button>
+            <button class="btn intro__no" type="button" data-text="intro.no">no</button>
+          </div>
+
+          <p class="intro__reply hand" aria-live="polite" data-stagger></p>
         </div>
-
-        <p class="intro__reply hand" aria-live="polite" data-stagger></p>
       </div>
     </section>
 
