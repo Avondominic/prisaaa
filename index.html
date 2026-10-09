@@ -28,6 +28,9 @@
   <script src="js/reveal.js" defer></script>
   <script src="js/music.js" defer></script>
   <script src="js/song.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
+  <script src="js/lore.js" defer></script>
+  <script src="js/memories.js" defer></script>
   <script src="js/easter-egg.js" defer></script>
   <script src="js/parallax.js" defer></script>
   <script src="js/main.js" defer></script>
@@ -50,6 +53,13 @@
     <symbol id="i-pause" viewBox="0 0 24 24"><rect x="5.5" y="4" width="4.6" height="16" rx="1.4" fill="currentColor"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.4" fill="currentColor"/></symbol>
     <symbol id="i-vol" viewBox="0 0 24 24"><path d="M3 9.5v5h4l5 4.5v-14l-5 4.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="i-mute" viewBox="0 0 24 24"><path d="M3 9.5v5h4l5 4.5v-14l-5 4.5z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="d-pencil" viewBox="0 0 40 40"><path d="M7 33l3-11L27 5l8 8-17 17zM10 22l8 8M24 8l8 8"/></symbol>
+    <symbol id="d-book" viewBox="0 0 44 34"><path d="M22 8C16 3 9 3 3 5v24c6-2 13-2 19 3 6-5 13-5 19-3V5c-6-2-13-2-19 3zM22 8v24"/></symbol>
+    <symbol id="d-fries" viewBox="0 0 36 40"><path d="M7 17h22l-3 21H10zM11 17V6M16 17V3M21 17V5M25 17V8M12 26c3 2 9 2 12 0"/></symbol>
+    <symbol id="d-flower" viewBox="0 0 36 36"><circle cx="18" cy="9" r="6"/><circle cx="27" cy="18" r="6"/><circle cx="18" cy="27" r="6"/><circle cx="9" cy="18" r="6"/><circle cx="18" cy="18" r="3.5"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
     <symbol id="d-loop" viewBox="0 0 150 60"><path d="M3 45c25 10 45 4 55-12 8-14-6-24-14-12-9 13 10 28 34 22 22-5 42-26 68-30" stroke-dasharray="2 9"/></symbol>
   </svg>
 
@@ -235,6 +245,77 @@
           </div>
 
           <p class="player__missing" hidden></p>
+        </div>
+      </div>
+
+      <button class="cue hand" type="button" hidden>
+        <span data-text="song.more">there's more</span>
+        <svg class="doodle cue__arrow" viewBox="0 0 24 30" aria-hidden="true"><path d="M12 3v22M5 18l7 8 7-8"/></svg>
+      </button>
+    </section>
+
+    <!-- ============================================================
+         5 · MEMORIES — photo scrapbook + OUR ICONIC LORE notebook
+         Photos and notes come from config.js (memories / lore).
+    ============================================================= -->
+    <section class="scene scene--memories" data-scene="memories" aria-labelledby="memories-heading" hidden>
+
+      <!-- part 1: the photo scrapbook -->
+      <div class="scene__inner mem__inner">
+        <header class="mem__aside">
+          <div class="mem__aside-sticky">
+            <span class="tag mem__kicker" data-stagger data-text="memories.kicker">remember these?</span>
+            <h2 id="memories-heading" class="mem__heading" tabindex="-1" data-stagger data-text="memories.heading">our little moments</h2>
+            <p class="mem__note hand" data-stagger>
+              <span data-text="memories.note">(click a photo to see it bigger)</span>
+              <svg class="doodle mem__note-arrow" viewBox="0 0 32 30" aria-hidden="true"><use href="#d-arrow"/></svg>
+            </p>
+            <div class="mem__cat" data-stagger aria-hidden="true">
+              <span class="tape tape--b"></span>
+              <div class="sticker"><img id="mem-cat" class="sticker__media" src="" alt="" width="150" height="150"></div>
+            </div>
+          </div>
+        </header>
+
+        <ul class="mem__wall" aria-label="photos"></ul>
+      </div>
+
+      <button class="cue cue--inline hand" type="button" hidden>
+        <span data-text="memories.more">there's more</span>
+        <svg class="doodle cue__arrow" viewBox="0 0 24 30" aria-hidden="true"><path d="M12 3v22M5 18l7 8 7-8"/></svg>
+      </button>
+
+      <!-- part 2: OUR ICONIC LORE — an open notebook of 7 sticky notes -->
+      <div class="lore" aria-labelledby="lore-heading">
+        <div class="notebook">
+          <div class="notebook__page notebook__page--left">
+            <span class="lore__stamp" data-text="lore.stamp" aria-hidden="true">certified iconic</span>
+            <h2 id="lore-heading" class="lore__heading hand" tabindex="-1"></h2>
+            <p class="lore__subtitle hand" data-text="lore.subtitle">the moments that live rent free in my head...</p>
+            <div class="lore__keeper" aria-hidden="true">
+              <span class="tape"></span>
+              <div class="sticker"><img id="lore-cat" class="sticker__media" src="" alt="" width="140" height="140"></div>
+            </div>
+            <p class="lore__hint hand" data-text="lore.hint">(arrows, dots, keyboard or swipe)</p>
+            <svg class="doodle doodle--accent doodle--filled lore__deco lore__deco--a" viewBox="0 0 34 34" aria-hidden="true"><use href="#d-sparkle"/></svg>
+            <svg class="doodle lore__deco lore__deco--b" viewBox="0 0 26 24" aria-hidden="true"><use href="#d-heart"/></svg>
+            <svg class="doodle lore__deco lore__deco--c" viewBox="0 0 34 34" aria-hidden="true"><use href="#d-star"/></svg>
+          </div>
+
+          <div class="notebook__rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div class="notebook__page notebook__page--right">
+            <div class="lore__stage" role="group" aria-roledescription="carousel" aria-label="our iconic lore">
+              <div class="lore__stack" aria-hidden="true"><span></span><span></span></div>
+              <article class="note" aria-roledescription="slide"></article>
+            </div>
+            <div class="lore__controls">
+              <button class="lore__arrow lore__prev" type="button" aria-label="Previous memory"><svg aria-hidden="true"><use href="#i-prev"/></svg></button>
+              <div class="lore__dots" role="group" aria-label="choose a memory"></div>
+              <p class="lore__count" aria-hidden="true"><span class="lore__now">01</span> / <span class="lore__total">07</span></p>
+              <button class="lore__arrow lore__next" type="button" aria-label="Next memory"><svg aria-hidden="true"><use href="#i-next"/></svg></button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -227,19 +227,9 @@ Scenes.register('reveal', (() => {
   }
 
   function showCue(){
-    const cue = U.$('.cue', scene);
-    if (!cue.hidden) return;
-    cue.hidden = false;
-    U.animate(cue, [
-      { opacity: 0, transform: 'translate(-50%, 10px)' },
-      { opacity: 1, transform: 'translate(-50%, 0)' }
-    ], { duration: 600, delay: 400, fill: 'backwards' });
-    cue.addEventListener('click', () => {
-      if (!Scenes.isEntered('song')) return Scenes.go('song');
-      const song = document.querySelector('section[data-scene="song"]');
-      song.scrollIntoView({ behavior: U.reduced() ? 'auto' : 'smooth', block: 'start' });
-      U.$('#song-heading').focus({ preventScroll: true });
-    });
+    U.cue(U.$('.cue', scene),
+      () => document.querySelector('section[data-scene="song"]'),
+      () => U.$('#song-heading'));
   }
 
   return { init, enter };

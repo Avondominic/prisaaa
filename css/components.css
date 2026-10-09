@@ -293,8 +293,18 @@
   padding: 6px 14px;
   font-size: 24px;
   color: var(--ink-soft);
-  transform: translateX(-50%);
+  translate: -50% 0;
   transition: color var(--dur) var(--ease-out);
+}
+/* in the flow of the page: between two parts, and on phones/tablets */
+.cue--inline{
+  position: static;
+  translate: none;
+  margin: clamp(28px, 6svh, 64px) auto;
+}
+@media (max-width: 1023px){
+  .cue{ position: static; translate: none; margin: 22px auto 0; }
+  .cue--inline{ margin: 36px auto; }
 }
 .cue__arrow{
   position: static;
@@ -523,7 +533,7 @@
 .mini{
   position: fixed;
   z-index: 70;
-  right: calc(20px + env(safe-area-inset-right, 0px));
+  right: calc(20px + env(safe-area-inset-right, 0px) + var(--sbw, 0px));
   bottom: calc(20px + var(--safe-bottom));
   display: flex;
   align-items: center;
@@ -590,3 +600,192 @@
   box-shadow: none;
 }
 .mini .mini__play svg{ width: 20px; height: 20px; }
+
+/* ---------- lightbox ---------- */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: calc(16px + var(--safe-top)) var(--gutter) calc(96px + var(--safe-bottom));
+}
+.lightbox__backdrop{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(rgba(255, 255, 255, .08) 1.2px, transparent 1.4px) 0 0 / 22px 22px,
+    rgba(43, 24, 56, .62);
+}
+.lightbox__stage{
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "prev card next" ". count .";
+  align-items: center;
+  justify-items: center;
+  gap: 18px clamp(14px, 3vw, 40px);
+  max-width: 100%;
+}
+.lightbox__card{
+  grid-area: card;
+  position: relative;
+  width: min(68vh, 560px, calc(100vw - 2 * var(--gutter) - 140px));
+  margin: 0;
+  padding: 14px 14px 0;
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55);
+  transform: rotate(var(--tilt, -1deg));
+  touch-action: pan-y;
+}
+.lightbox__card .tape{ top: -16px; left: 50%; width: 110px; height: 32px; margin-left: -55px; z-index: 2; }
+.lightbox__img,
+.lightbox__ph{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.lightbox__ph strong{ font-size: 18px; }
+.lightbox__ph span{ font-size: 14px; }
+.lightbox__meta{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 6px 16px;
+}
+.lightbox__caption{ font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1; }
+.lightbox__date{ flex: none; font-size: 14px; font-weight: 700; color: var(--ink-soft); }
+.lightbox__close{
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--butter);
+  color: var(--ink);
+  box-shadow: var(--shadow-chunky);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.lightbox__close svg{ width: 20px; height: 20px; }
+.lightbox__arrow{
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-chunky);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.lightbox__arrow svg{ width: 24px; height: 24px; }
+.lightbox__prev{ grid-area: prev; }
+.lightbox__next{ grid-area: next; }
+.lightbox__arrow:active,
+.lightbox__close:active{ transform: translateY(3px); box-shadow: var(--shadow-chunky-press); }
+@media (hover: hover){
+  .lightbox__arrow:hover{ transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+  .lightbox__close:hover{ transform: rotate(90deg); }
+}
+.lightbox__count{
+  grid-area: count;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .92);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+}
+/* the mini-player stays usable above the lightbox */
+.mini{ z-index: 95; }
+
+@media (max-width: 640px){
+  .lightbox__stage{
+    grid-template-columns: auto auto;
+    grid-template-areas: "card card" "prev next" "count count";
+    gap: 14px 24px;
+  }
+  .lightbox__card{ width: min(100%, calc(100vw - 2 * var(--gutter))); }
+  .lightbox__prev{ justify-self: end; }
+  .lightbox__next{ justify-self: start; }
+}
+
+/* ---------- sticky note (OUR ICONIC LORE) ---------- */
+.note{
+  --paper: #ffe58a;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.02;
+  padding: 44px 30px 30px;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, .35), transparent 40%),
+    linear-gradient(to top left, rgba(43, 24, 56, .08), transparent 22%),
+    var(--paper);
+  border-radius: 3px 3px 22px 3px;      /* slightly lifted bottom-right corner */
+  box-shadow:
+    0 1px 0 rgba(43, 24, 56, .12),
+    0 22px 30px -16px rgba(43, 24, 56, .45),
+    10px 14px 0 -6px rgba(43, 24, 56, .06);
+  transform: rotate(var(--tilt, -2deg));
+  text-align: left;
+}
+.note--butter{ --paper: #ffe58a; }
+.note--pink  { --paper: #ffc3d6; }
+.note--sky   { --paper: #bfe2ff; }
+.note--mint  { --paper: #c3efd6; }
+.note--lilac { --paper: #dccfff; }
+.note--peach { --paper: #ffd1b3; }
+.note--lime  { --paper: #e3f4a3; }
+.note__tape{ top: -14px; left: 50%; margin-left: -43px; --tape-tilt: -3deg; }
+.note__num{
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: .08em;
+  color: rgba(43, 24, 56, .5);
+}
+.note__title{
+  max-width: 13ch;
+  font-size: clamp(22px, 1.9vw, 30px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.note__text{
+  margin-top: 14px;
+  max-width: 22ch;
+  font-size: clamp(25px, 2.1vw, 33px);
+  line-height: 1.12;
+  color: var(--ink);
+}
+.note__doodle{ position: absolute; color: var(--ink); stroke-width: 2.4; }
+.note__doodle--a{ width: 42px; right: 22px; bottom: 26px; transform: rotate(-10deg); }
+.note__doodle--b{ width: 30px; right: 78px; bottom: 74px; transform: rotate(12deg); color: var(--accent); }
+.note__cat{
+  position: absolute;
+  left: -18px;
+  bottom: -20px;
+  width: 78px;
+  height: 78px;
+  padding: 5px;
+  background: var(--surface);
+  border-radius: 50%;
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(43, 24, 56, .06);
+  transform: rotate(-8deg);
+}
+.note__cat-img{ width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }

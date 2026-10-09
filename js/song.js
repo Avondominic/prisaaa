@@ -32,9 +32,15 @@ Scenes.register('song', (() => {
   // unlocked (end of the reveal): fetch metadata so the player is ready
   function unlock(){ Music.load(); }
 
-  function enter(){
+  function enter(scene){
     Music.load();
     Music.showMini();
+
+    // the memories come next — on the page now, entrance when scrolled to
+    Scenes.unlock('memories');
+    U.cue(U.$('.cue', scene),
+      () => document.querySelector('section[data-scene="memories"]'),
+      () => U.$('#memories-heading'));
   }
 
   return { init, unlock, enter };

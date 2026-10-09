@@ -77,13 +77,55 @@ window.BIRTHDAY = {
     hint: "(press play whenever you're ready — volume up)",
     missing: "no song added yet — put the file in assets/music/ and set song.src in config.js",
     firstPlay: { mood: "love", text: "ahh yes. this one." },   // cat reaction the first time it plays
-    volume: 0.8                      // starting volume, 0 – 1
+    volume: 0.8,                     // starting volume, 0 – 1
+    more: "there's more"             // cue from the song down to the memories
   },
 
-  /* ---------- 5. memories ---------- */
-  memories: [
-    // { src: "assets/memories/01.jpg", caption: "[CAPTION]", date: "[DATE]" },
-  ],
+  /* ---------- 5. memories: photo scrapbook ----------
+     One entry per photo. Put the files in assets/memories/ and set
+     `src`, e.g. "assets/memories/01.jpg". Leave `src` empty to show a
+     labelled placeholder. Delete every entry to show the "photos
+     coming soon" card instead. Any number of photos works. */
+  memories: {
+    kicker: "remember these?",
+    heading: "our little moments",
+    note: "(click a photo to see it bigger)",
+    empty: {
+      title: "photos coming soon",
+      hint: "add them in config.js → memories.photos"
+    },
+    photos: [
+      { src: "", alt: "[PHOTO 01 DESCRIPTION]", caption: "[CAPTION 01]", date: "[DATE]" },
+      { src: "", alt: "[PHOTO 02 DESCRIPTION]", caption: "[CAPTION 02]", date: "[DATE]" },
+      { src: "", alt: "[PHOTO 03 DESCRIPTION]", caption: "[CAPTION 03]", date: "[DATE]" },
+      { src: "", alt: "[PHOTO 04 DESCRIPTION]", caption: "[CAPTION 04]", date: "[DATE]" },
+      { src: "", alt: "[PHOTO 05 DESCRIPTION]", caption: "[CAPTION 05]", date: "[DATE]" },
+      { src: "", alt: "[PHOTO 06 DESCRIPTION]", caption: "[CAPTION 06]", date: "[DATE]" }
+    ],
+    more: "there's more"               // cue from the photos down to the lore notebook
+  },
+
+  /* ---------- 5b. OUR ICONIC LORE: 7 sticky notes (no photos) ----------
+     Each note: title, text, paper colour and its decorations.
+       color:   "butter" | "pink" | "sky" | "mint" | "lilac" | "peach" | "lime"
+       doodles: any two of "pencil" "book" "fries" "flower" "heart" "star" "sparkle" "swirl"
+       cat:     which cat sticker sits on the note (a mood from `cats` below) */
+  lore: {
+    heading: "OUR ICONIC LORE",
+    subtitle: "the moments that live rent free in my head...",
+    hint: "(arrows, dots, keyboard or swipe)",
+    stamp: "certified iconic",
+    finished: { mood: "love", text: "and that's the lore. iconic." },   // cat reaction after the last note
+    notes: [
+      { title: "THE HINDI BOOK INCIDENT", text: "[the day I scribbled on your Hindi book — write the full story here]", color: "butter", doodles: ["pencil", "book"],   cat: "shock" },
+      { title: "THE MCDONALD'S MEMORY",   text: "[our McDonald's outing — write the full story here]",                 color: "pink",   doodles: ["fries", "heart"],   cat: "happy" },
+      { title: "MEMORY #03",              text: "[WRITE MEMORY #03 HERE]",                                              color: "sky",    doodles: ["star", "sparkle"],  cat: "love"  },
+      { title: "MEMORY #04",              text: "[WRITE MEMORY #04 HERE]",                                              color: "mint",   doodles: ["flower", "swirl"],  cat: "neutral" },
+      { title: "MEMORY #05",              text: "[WRITE MEMORY #05 HERE]",                                              color: "lilac",  doodles: ["heart", "star"],    cat: "happy" },
+      { title: "MEMORY #06",              text: "[WRITE MEMORY #06 HERE]",                                              color: "peach",  doodles: ["sparkle", "flower"], cat: "shock" },
+      { title: "MEMORY #07",              text: "[WRITE MEMORY #07 HERE]",                                              color: "lime",   doodles: ["swirl", "heart"],   cat: "love"  }
+    ]
+  },
 
   /* ---------- 6. letter ---------- */
   letter: {

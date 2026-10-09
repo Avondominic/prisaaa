@@ -83,3 +83,6 @@ h1, h2, h3{
   font-family: var(--font-display);
   font-size: 22px;
 }
+
+/* page scroll lock while a modal (lightbox) is open */
+html.is-locked{ overflow: hidden; padding-right: var(--sbw, 0px); }

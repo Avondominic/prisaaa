@@ -86,5 +86,40 @@ window.U = (() => {
     });
   }
 
-  return { $, $$, reduced, wait, animate, media, swapMedia, preload, bindText, motionQuery };
+  /* Inline doodle from the sprite in index.html: doodle('heart', 'my-class') */
+  const DOODLE_BOX = {
+    heart: '0 0 26 24', sparkle: '0 0 34 34', star: '0 0 34 34', swirl: '0 0 54 34',
+    wave: '0 0 120 30', pencil: '0 0 40 40', book: '0 0 44 34', fries: '0 0 36 40', flower: '0 0 36 36'
+  };
+  function doodle(name, className = ''){
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', DOODLE_BOX[name] || '0 0 34 34');
+    svg.setAttribute('class', `doodle ${className}`.trim());
+    svg.setAttribute('aria-hidden', 'true');
+    const use = document.createElementNS(ns, 'use');
+    use.setAttribute('href', `#d-${name}`);
+    svg.append(use);
+    return svg;
+  }
+
+  /* "there's more" cue: fades in once, then scrolls to `target`
+     (an element, or a function returning one) and moves focus to
+     `focusEl` so keyboard users land in the right place. */
+  function cue(btn, target, focusEl){
+    if (!btn || !btn.hidden) return;
+    btn.hidden = false;
+    animate(btn, [
+      { opacity: 0, transform: 'translateY(10px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], { duration: 600, delay: 400, fill: 'backwards' });
+    btn.addEventListener('click', () => {
+      const el = typeof target === 'function' ? target() : target;
+      el?.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+      const f = typeof focusEl === 'function' ? focusEl() : focusEl;
+      f?.focus({ preventScroll: true });
+    });
+  }
+
+  return { $, $$, reduced, wait, animate, media, swapMedia, preload, bindText, motionQuery, doodle, cue };
 })();

@@ -9,8 +9,9 @@ intro → opening → reveal → song → memories → letter → gift → final
 
 > **Work in progress.** Built so far: project skeleton, styling system,
 > scene controller, cat reactions, **intro**, **opening** and the **birthday
-> reveal** (with the easter egg) and the **song** section with its sticky
-> mini-player. Memories, letter, gift and finale come next.
+> reveal** (with the easter egg), the **song** section with its sticky
+> mini-player, and **memories** (photo scrapbook + the OUR ICONIC LORE
+> notebook). Letter, gift and finale come next.
 
 ## Make it yours
 
@@ -29,6 +30,15 @@ The three goofy images on the reveal are `reveal.goofy` — set each `src`
 Music never autoplays — it only starts from the song section's player.
 To add the song: put the `.mp3` in `assets/music/` and set `song.src`
 (plus `song.title` / `song.artist`) in `config.js`.
+
+**Memories.** Photos are `memories.photos` in `config.js` — one entry per
+photo (`src`, `alt`, `caption`, `date`). Put the files in `assets/memories/`.
+Empty `src` shows a labelled placeholder; an empty list shows a "photos coming
+soon" card. Click a photo to view it bigger (Esc closes, ←/→ or swipe to move).
+
+**OUR ICONIC LORE.** The seven sticky notes are `lore.notes` — each has a
+`title`, `text`, paper `color`, two `doodles` and a `cat` sticker mood. The
+heading, subtitle and the little stamp are in `lore` too.
 
 > Seeking within the song needs a server that supports range requests.
 > Netlify, GitHub Pages and opening `index.html` directly all do;
@@ -66,6 +76,9 @@ js/
   easter-egg.js       hidden tap-to-unlock note
   music.js            audio engine + sticky mini-player (never autoplays)
   song.js             scene 4 — cassette + player
+  lightbox.js         view a memory bigger (accessible dialog)
+  lore.js             OUR ICONIC LORE sticky-note notebook
+  memories.js         scene 5 — photo scrapbook + notebook
   parallax.js         subtle mouse parallax on desktop (off for touch / reduced motion)
   main.js             boot
 assets/               cats, goofy images, memories, music, fonts
