@@ -789,3 +789,186 @@
   transform: rotate(-8deg);
 }
 .note__cat-img{ width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+/* ---------- envelope ----------
+   Layers, back to front: back · letter peeking inside · front pocket
+   · address · flap (swings open) · heart seal. */
+.envelope{
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  padding: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease-out);
+}
+@media (hover: hover){
+  .envelope[aria-expanded="false"]:hover{ transform: translateY(-5px) rotate(-1deg); }
+}
+.envelope:focus-visible{ outline-offset: 8px; border-radius: 16px; }
+.env__back{
+  position: absolute;
+  inset: 0;
+  background: #ffb3cb;
+  border: 2.5px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 0 6px 0 var(--ink), 0 26px 40px -18px rgba(43, 24, 56, .45);
+}
+.env__peek{
+  position: absolute;
+  z-index: 1;
+  left: 8%;
+  right: 8%;
+  top: 6%;
+  bottom: 12%;
+  display: flex;
+  flex-direction: column;
+  gap: 9%;
+  padding: 9% 9% 0;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 15%, #e2e8f5 15% 16%),
+    #fffaf0;
+  border: 2px solid rgba(43, 24, 56, .35);
+  border-radius: 4px;
+}
+.env__peek i{ display: block; height: 4px; border-radius: 4px; background: rgba(43, 24, 56, .28); }
+.env__peek i:nth-child(1){ width: 34%; background: rgba(255, 61, 104, .55); }
+.env__peek i:nth-child(2){ width: 82%; }
+.env__peek i:nth-child(3){ width: 70%; }
+.env__peek i:nth-child(4){ width: 76%; }
+.env__front{
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.env__front path{
+  fill: #ffc8d9;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.env__to{
+  position: absolute;
+  z-index: 3;
+  left: 9%;
+  bottom: 9%;
+  font-size: clamp(22px, 2vw, 32px);
+  color: var(--ink);
+  transform: rotate(-3deg);
+}
+.env__name{ color: var(--accent); }
+.env__flap{
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 59%;
+  transform-origin: top center;
+  transform: perspective(1100px) rotateX(0deg);
+}
+.env__flap svg{ display: block; width: 100%; height: 100%; overflow: visible; }
+.env__flap path{
+  fill: #ffd5e2;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+/* once open, the flap sits behind the letter */
+.envelope.is-flap-open .env__flap{ z-index: 0; }
+.env__seal{
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 59%;
+  display: grid;
+  place-items: center;
+  width: 17%;
+  aspect-ratio: 1;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .35), transparent 45%),
+    var(--accent);
+  box-shadow: 0 3px 0 var(--ink), inset 0 0 0 5px rgba(255, 255, 255, .18);
+  color: #fff;
+  transform: translate(-50%, -50%);
+}
+.env__seal svg{ position: static; width: 44%; }
+
+/* ---------- letter paper ----------
+   Ruled writing paper; text sits on the lines (--lh = line height).
+   It grows with the letter, so long letters are never clipped. */
+.paper{
+  --lh: 36px;
+  --margin: 46px;
+  position: relative;
+  isolation: isolate;               /* both paper layers stay behind the text */
+  width: 100%;
+  padding: calc(var(--lh) * 2) 22px calc(var(--lh) * 2) calc(var(--margin) + 14px);
+  rotate: -.5deg;
+  font-size: 25px;
+  line-height: var(--lh);
+  color: var(--ink);
+  text-align: left;
+}
+/* the sheet itself: ruled lines + red margin */
+.paper::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, transparent var(--margin), rgba(255, 61, 104, .4) var(--margin) calc(var(--margin) + 2px), transparent calc(var(--margin) + 2px)),
+    repeating-linear-gradient(to bottom, transparent 0 calc(var(--lh) - 2px), #dfe6f3 calc(var(--lh) - 2px) var(--lh)),
+    #fffaf0;
+  border-radius: 4px;
+  box-shadow:
+    0 1px 0 rgba(43, 24, 56, .08),
+    0 30px 50px -26px rgba(43, 24, 56, .45);
+}
+/* a second sheet peeking out underneath */
+.paper::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: #fff3e2;
+  border-radius: 4px;
+  box-shadow: 0 18px 30px -20px rgba(43, 24, 56, .35);
+  transform: rotate(2.2deg) translate(6px, 6px);
+}
+.paper:focus{ outline: none; }
+.paper__tape{ top: -14px; width: 92px; height: 28px; }
+.paper__tape--l{ left: -18px; --tape-tilt: -32deg; }
+.paper__tape--r{ right: -18px; --tape-tilt: 30deg; }
+.paper__greeting{ font-size: 1.3em; margin-bottom: var(--lh); }
+.paper__body p{ margin-bottom: var(--lh); overflow-wrap: anywhere; }
+.paper__signoff{ text-align: right; padding-right: 6%; }
+.paper__signature{
+  text-align: right;
+  padding-right: 6%;
+  font-size: 1.45em;
+  color: var(--accent);
+  transform: rotate(-2deg);
+  transform-origin: right center;
+}
+.paper__cat{
+  position: absolute;
+  left: -16px;
+  bottom: -22px;
+  width: 84px;
+  padding: 5px;
+  border-radius: 18px;
+  --tilt: -8deg;
+}
+.paper__cat .sticker__media{ border-radius: 13px; }
+.paper__heart{ position: absolute; }
+.paper__heart--a{ width: 26px; right: 20px; bottom: 20px; transform: rotate(12deg); }
+.paper__heart--b{ width: 18px; right: 52px; bottom: 44px; transform: rotate(-10deg); }

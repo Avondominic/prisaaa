@@ -10,8 +10,8 @@ intro → opening → reveal → song → memories → letter → gift → final
 > **Work in progress.** Built so far: project skeleton, styling system,
 > scene controller, cat reactions, **intro**, **opening** and the **birthday
 > reveal** (with the easter egg), the **song** section with its sticky
-> mini-player, and **memories** (photo scrapbook + the OUR ICONIC LORE
-> notebook). Letter, gift and finale come next.
+> mini-player, **memories** (photo scrapbook + the OUR ICONIC LORE
+> notebook) and the **letter**. Gift and finale come next.
 
 ## Make it yours
 
@@ -39,6 +39,11 @@ soon" card. Click a photo to view it bigger (Esc closes, ←/→ or swipe to mov
 **OUR ICONIC LORE.** The seven sticky notes are `lore.notes` — each has a
 `title`, `text`, paper `color`, two `doodles` and a `cat` sticker mood. The
 heading, subtitle and the little stamp are in `lore` too.
+
+**Letter.** Everything is in `letter` in `config.js`: `greeting`, `body`,
+`signoff`, `signature`, plus the small captions around the envelope. Write the
+body as long as you like — leave a blank line between paragraphs; the paper
+grows to fit.
 
 > Seeking within the song needs a server that supports range requests.
 > Netlify, GitHub Pages and opening `index.html` directly all do;
@@ -79,6 +84,7 @@ js/
   lightbox.js         view a memory bigger (accessible dialog)
   lore.js             OUR ICONIC LORE sticky-note notebook
   memories.js         scene 5 — photo scrapbook + notebook
+  letter.js           scene 6 — envelope → handwritten letter
   parallax.js         subtle mouse parallax on desktop (off for touch / reduced motion)
   main.js             boot
 assets/               cats, goofy images, memories, music, fonts

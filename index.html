@@ -31,6 +31,7 @@
   <script src="js/lightbox.js" defer></script>
   <script src="js/lore.js" defer></script>
   <script src="js/memories.js" defer></script>
+  <script src="js/letter.js" defer></script>
   <script src="js/easter-egg.js" defer></script>
   <script src="js/parallax.js" defer></script>
   <script src="js/main.js" defer></script>
@@ -317,6 +318,69 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <button class="cue cue--inline cue--letter hand" type="button" hidden>
+        <span data-text="memories.toLetter">one more thing</span>
+        <svg class="doodle cue__arrow" viewBox="0 0 24 30" aria-hidden="true"><path d="M12 3v22M5 18l7 8 7-8"/></svg>
+      </button>
+    </section>
+
+    <!-- ============================================================
+         6 · LETTER — an envelope that opens into a handwritten letter
+         All words come from config.js → letter.
+    ============================================================= -->
+    <section class="scene scene--letter" data-scene="letter" aria-labelledby="letter-heading" hidden>
+      <div class="scene__inner letter__inner">
+
+        <header class="letter__head">
+          <span class="tag letter__kicker" data-stagger data-text="letter.kicker">one last thing…</span>
+          <h2 id="letter-heading" class="letter__heading" tabindex="-1" data-stagger data-text="letter.heading">there's a letter for you</h2>
+        </header>
+
+        <div class="letter__stage" data-stagger>
+          <svg class="doodle doodle--accent doodle--filled letter__deco letter__deco--a" viewBox="0 0 26 24" aria-hidden="true"><use href="#d-heart"/></svg>
+          <svg class="doodle letter__deco letter__deco--b" viewBox="0 0 34 34" aria-hidden="true"><use href="#d-sparkle"/></svg>
+          <svg class="doodle letter__deco letter__deco--c" viewBox="0 0 26 24" aria-hidden="true"><use href="#d-heart"/></svg>
+
+          <div class="letter__env-wrap">
+            <span class="tape letter__env-tape" aria-hidden="true"></span>
+            <button class="envelope" type="button" aria-expanded="false" aria-controls="letter-paper">
+              <span class="sr-only" data-text="letter.openLabel">Open the letter</span>
+              <span class="env__back" aria-hidden="true"></span>
+              <span class="env__peek" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <svg class="env__front" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M2 2L150 116L298 2V198H2Z"/>
+              </svg>
+              <span class="env__to hand" aria-hidden="true"><span data-text="letter.envelopeTo">for</span> <span class="env__name" data-text="name">[NAME]</span></span>
+              <span class="env__flap" aria-hidden="true">
+                <svg viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M2 2H298L150 118Z"/></svg>
+              </span>
+              <span class="env__seal" aria-hidden="true">
+                <svg class="doodle doodle--filled" viewBox="0 0 26 24"><use href="#d-heart"/></svg>
+              </span>
+            </button>
+            <div class="letter__cat sticker" aria-hidden="true"><img id="letter-cat" class="sticker__media" src="" alt="" width="120" height="120"></div>
+          </div>
+
+          <p class="letter__hint hand" data-text="letter.hint">(open it whenever you're ready)</p>
+        </div>
+
+        <article id="letter-paper" class="paper" tabindex="-1" aria-labelledby="letter-heading" hidden>
+          <span class="tape paper__tape paper__tape--l" aria-hidden="true"></span>
+          <span class="tape tape--b paper__tape paper__tape--r" aria-hidden="true"></span>
+          <p class="paper__greeting hand"></p>
+          <div class="paper__body hand"></div>
+          <p class="paper__signoff hand"></p>
+          <p class="paper__signature hand"></p>
+          <div class="paper__cat sticker" aria-hidden="true"><img id="paper-cat" class="sticker__media" src="" alt="" width="110" height="110"></div>
+          <svg class="doodle doodle--accent doodle--filled paper__heart paper__heart--a" viewBox="0 0 26 24" aria-hidden="true"><use href="#d-heart"/></svg>
+          <svg class="doodle paper__heart paper__heart--b" viewBox="0 0 26 24" aria-hidden="true"><use href="#d-heart"/></svg>
+        </article>
+
+        <button class="btn letter__replay" type="button" hidden>
+          <span data-text="letter.replay">fold it back up</span>
+        </button>
       </div>
     </section>
 

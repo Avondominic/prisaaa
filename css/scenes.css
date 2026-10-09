@@ -986,3 +986,106 @@
   .lore__controls{ flex-wrap: nowrap; gap: 14px; margin: 0; }
   .lore__dots{ order: 0; flex-basis: auto; }
 }
+
+/* ================================================================
+   LETTER — envelope → handwritten letter
+   Centred column; the envelope closed first, then the paper in its
+   place. Generous bottom padding so the mini-player never sits on
+   the letter's last lines or the "fold it back up" button.
+================================================================= */
+.scene--letter{
+  padding-block: calc(56px + var(--safe-top)) calc(150px + var(--safe-bottom));
+}
+.letter__inner{
+  max-width: 600px;
+  gap: 18px;
+}
+.letter__head{
+  position: relative;
+  z-index: 2;                       /* the opening flap + letter rise behind the title */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.letter__kicker{ font-size: 22px; background: var(--butter); }
+.letter__heading{
+  font-size: clamp(42px, 11.5vw, 60px);
+  line-height: .92;
+  max-width: 10ch;
+}
+
+.letter__stage{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  margin-top: 26px;
+}
+.letter__env-wrap{
+  position: relative;
+  width: min(100%, 360px);
+}
+.letter__env-tape{ top: -12px; left: -18px; z-index: 6; --tape-tilt: -28deg; }
+.letter__cat{
+  position: absolute;
+  z-index: 6;
+  right: -14px;
+  bottom: -26px;
+  width: 25%;
+  padding: 5px;
+  border-radius: 18px;
+  --tilt: 9deg;
+  pointer-events: none;
+}
+.letter__cat .sticker__media{ border-radius: 13px; }
+.letter__hint{ font-size: 22px; color: var(--ink-soft); transform: rotate(-2deg); }
+.letter__deco{ position: absolute; display: none; }
+
+.paper{ margin-top: 10px; scroll-margin-top: 40px; }
+.letter__replay{ margin-top: 30px; }
+
+@media (min-width: 768px){
+  .letter__inner{ max-width: 720px; }
+  .letter__heading{ font-size: 76px; }
+  .letter__env-wrap{ width: min(100%, 460px); }
+  .paper{ --lh: 40px; --margin: 60px; font-size: 28px; padding-right: 40px; }
+}
+
+@media (min-width: 1024px){
+  .scene--letter{ padding-inline: clamp(48px, 6vw, 120px); }
+  .letter__inner{ max-width: 860px; gap: 14px; }
+  .letter__kicker{ font-size: 28px; padding: 2px 18px 6px; }
+  .letter__heading{
+    max-width: none;
+    font-size: clamp(64px, min(5.4vw, 9.5svh), 104px);
+  }
+  .letter__stage{ margin-top: clamp(48px, 9svh, 96px); gap: 28px; }
+  .letter__env-wrap{ width: clamp(380px, min(36vw, 64svh), 600px); }
+  .letter__env-tape{ width: 120px; height: 34px; top: -14px; left: -30px; }
+  .letter__hint{ font-size: 27px; }
+
+  .letter__deco{ display: block; }
+  .letter__deco--a{ width: 38px; left: calc(50% - clamp(380px, min(36vw, 64svh), 600px) / 2 - 90px); top: 30%; transform: rotate(-14deg); }
+  .letter__deco--b{ width: 44px; right: calc(50% - clamp(380px, min(36vw, 64svh), 600px) / 2 - 96px); top: 8%; }
+  .letter__deco--c{ width: 26px; right: calc(50% - clamp(380px, min(36vw, 64svh), 600px) / 2 - 70px); top: 62%; transform: rotate(12deg); }
+
+  .paper{
+    --lh: 46px;
+    --margin: 78px;
+    max-width: 780px;
+    font-size: 32px;
+    padding: calc(var(--lh) * 2) 64px calc(var(--lh) * 2) calc(var(--margin) + 22px);
+  }
+  .paper__tape{ width: 120px; height: 34px; top: -16px; }
+  .paper__cat{ width: 110px; left: -34px; bottom: -30px; }
+  .paper__heart--a{ width: 34px; right: 30px; bottom: 26px; }
+  .paper__heart--b{ width: 22px; right: 72px; bottom: 58px; }
+}
+
+/* keep the paper clear of the mini-player on narrower desktops */
+@media (min-width: 1024px) and (max-width: 1400px){
+  .paper{ max-width: 700px; }
+}

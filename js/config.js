@@ -102,7 +102,8 @@ window.BIRTHDAY = {
       { src: "", alt: "[PHOTO 05 DESCRIPTION]", caption: "[CAPTION 05]", date: "[DATE]" },
       { src: "", alt: "[PHOTO 06 DESCRIPTION]", caption: "[CAPTION 06]", date: "[DATE]" }
     ],
-    more: "there's more"               // cue from the photos down to the lore notebook
+    more: "there's more",              // cue from the photos down to the lore notebook
+    toLetter: "one more thing"         // cue from the notebook down to the letter
   },
 
   /* ---------- 5b. OUR ICONIC LORE: 7 sticky notes (no photos) ----------
@@ -127,10 +128,21 @@ window.BIRTHDAY = {
     ]
   },
 
-  /* ---------- 6. letter ---------- */
+  /* ---------- 6. letter ----------
+     The envelope opens into a handwritten letter.
+     `body`: write as much as you like — leave a blank line between
+     paragraphs. The paper simply grows to fit. */
   letter: {
+    kicker: "one last thing…",
+    heading: "there's a letter for you",
+    hint: "(open it whenever you're ready)",
+    envelopeTo: "for",                     // written on the envelope, followed by the name above
+    openLabel: "Open the letter",          // for screen readers / keyboard users
+    replay: "fold it back up",             // button under the letter that closes it again
+
     greeting: "[GREETING],",
-    body: "[YOUR MESSAGE GOES HERE. Use a blank line between paragraphs.]",
+    body: "[WRITE YOUR LETTER HERE]",
+    signoff: "[SIGN-OFF],",
     signature: "[YOUR NAME]"
   },
 

@@ -129,7 +129,13 @@ Scenes.register('memories', (() => {
 
   function enter(){
     watchDrops();
-    U.cue(U.$('.cue--inline', scene), () => U.$('.lore', scene), () => U.$('#lore-heading'));
+    U.cue(U.$('.cue--inline:not(.cue--letter)', scene), () => U.$('.lore', scene), () => U.$('#lore-heading'));
+
+    // the letter comes next — on the page now, entrance when scrolled to
+    Scenes.unlock('letter');
+    U.cue(U.$('.cue--letter', scene),
+      () => document.querySelector('section[data-scene="letter"]'),
+      () => U.$('#letter-heading'));
   }
 
   return { init, enter };
